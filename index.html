@@ -7,8 +7,9 @@
     <title>Pokémon GO Coordinates</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
             margin: 0;
             padding: 0;
             display: flex;
@@ -18,35 +19,36 @@
         }
 
         .container {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            max-width: 800px;
-            width: 100%;
-            padding: 20px;
+            background-color: #1f1f1f;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            max-width: 1000px;
+            width: 90%;
+            padding: 30px;
         }
 
         h1 {
             text-align: center;
-            color: #333;
+            color: #e0e0e0;
+            font-size: 2.5em;
         }
 
         .coordinates {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
-            margin-top: 20px;
+            margin-top: 30px;
         }
 
         .location {
-            background-color: #e0e7ff;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            width: calc(50% - 20px);
+            background-color: #2e2e2e;
+            border-radius: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            width: calc(45% - 20px);
             margin: 10px;
-            padding: 15px;
+            padding: 20px;
             text-align: center;
-            transition: transform 0.2s;
+            transition: transform 0.3s;
         }
 
         .location:hover {
@@ -55,17 +57,19 @@
 
         .location img {
             max-width: 100%;
-            border-radius: 5px;
+            border-radius: 10px;
+            margin-bottom: 15px;
         }
 
         .location h2 {
             margin: 10px 0;
-            color: #555;
+            color: #ffffff;
+            font-size: 1.5em;
         }
 
         .location p {
             margin: 0;
-            color: #777;
+            color: #b0b0b0;
         }
 
         @media (max-width: 600px) {
@@ -81,28 +85,29 @@
         <h1>Pokémon GO Coordinates</h1>
         <div class="coordinates">
             <div class="location">
-                <img src="https://image.pollinations.ai/prompt/Central%20Park%20New%20York,%20peaceful,%20people%20playing%20Pokemon%20GO,%20sunny,%20realistic,%20vibrant,%20detailed,%20urban%20park,%20artist%20unknown" alt="Central Park Image">
+                <img src="https://image.pollinations.ai/prompt/Central%20Park,%20beautiful,%20New%20York%20City%20detailed,%20lush,%20realistic,%20vivid%20colors,%20photorealism,%20urban%20fantasy,%20illustrated%20by%20Hayao%20Miyazaki" alt="Central Park">
                 <h2>Central Park, New York</h2>
                 <p>Coordinates: 40.785091, -73.968285</p>
-                <p>![Image](https://image.pollinations.ai/prompt/Central%20Park%20New%20York,%20peaceful,%20people%20playing%20Pokemon%20GO,%20sunny,%20realistic,%20vibrant,%20detailed,%20urban%20park,%20artist%20unknown)</p>
             </div>
             <div class="location">
-                <img src="https://image.pollinations.ai/prompt/Santa%20Monica%20Pier,%20bustling,%20trainers%20catching%20Pokemon,%20sunset,%20artistic,%20colorful,%20stylized,%20beach%20scene,%20artist%20unknown" alt="Santa Monica Pier Image">
+                <img src="https://image.pollinations.ai/prompt/Santa%20Monica%20Pier,%20sunny,%20California%20detailed,%20vibrant,%20realistic,%20bright%20colors,%20photorealism,%20beach%20scenery,%20illustrated%20by%20David%20Hockney" alt="Santa Monica Pier">
                 <h2>Santa Monica Pier, California</h2>
                 <p>Coordinates: 34.009242, -118.497604</p>
-                <p>![Image](https://image.pollinations.ai/prompt/Santa%20Monica%20Pier,%20bustling,%20trainers%20catching%20Pokemon,%20sunset,%20artistic,%20colorful,%20stylized,%20beach%20scene,%20artist%20unknown)</p>
             </div>
             <div class="location">
-                <img src="https://image.pollinations.ai/prompt/Shibuya%20Crossing%20Tokyo,%20vibrant,%20people%20playing%20Pokemon%20GO,%20night,%20neon,%20futuristic,%20detailed,%20urban%20landscape,%20artist%20unknown" alt="Shibuya Crossing Image">
+                <img src="https://image.pollinations.ai/prompt/Eiffel%20Tower,%20romantic,%20Paris%20detailed,%20glowing,%20realistic,%20night%20lights,%20photorealism,%20urban%20fantasy,%20illustrated%20by%20Claude%20Monet" alt="Eiffel Tower">
+                <h2>Eiffel Tower, Paris</h2>
+                <p>Coordinates: 48.858844, 2.294351</p>
+            </div>
+            <div class="location">
+                <img src="https://image.pollinations.ai/prompt/Shibuya%20Crossing,%20bustling,%20Tokyo%20detailed,%20neon,%20realistic,%20vivid%20colors,%20photorealism,%20urban%20scene,%20illustrated%20by%20Katsuhiro%20Otomo" alt="Shibuya Crossing">
                 <h2>Shibuya Crossing, Tokyo</h2>
-                <p>Coordinates: 35.658034, 139.701636</p>
-                <p>![Image](https://image.pollinations.ai/prompt/Shibuya%20Crossing%20Tokyo,%20vibrant,%20people%20playing%20Pokemon%20GO,%20night,%20neon,%20futuristic,%20detailed,%20urban%20landscape,%20artist%20unknown)</p>
+                <p>Coordinates: 35.659506, 139.700044</p>
             </div>
             <div class="location">
-                <img src="https://image.pollinations.ai/prompt/Sydney%20Opera%20House,%20lively,%20trainers%20battling%20in%20Pokemon%20GO,%20daytime,%20iconic,%20bright,%20high%20definition,%20city%20view,%20artist%20unknown" alt="Sydney Opera House Image">
+                <img src="https://image.pollinations.ai/prompt/Sydney%20Opera%20House,%20iconic,%20Sydney%20detailed,%20serene,%20realistic,%20clear%20sky,%20photorealism,%20modern%20architecture,%20illustrated%20by%20Jørn%20Utzon" alt="Sydney Opera House">
                 <h2>Sydney Opera House, Australia</h2>
                 <p>Coordinates: -33.856784, 151.215297</p>
-                <p>![Image](https://image.pollinations.ai/prompt/Sydney%20Opera%20House,%20lively,%20trainers%20battling%20in%20Pokemon%20GO,%20daytime,%20iconic,%20bright,%20high%20definition,%20city%20view,%20artist%20unknown)</p>
             </div>
         </div>
     </div>
