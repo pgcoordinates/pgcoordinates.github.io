@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokémon GO Coordinates</title>
+    <title>Pokémon GO Discord Server</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -12,69 +12,92 @@
             color: #ffffff;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
         }
 
         .container {
-            background-color: #1f1f1f;
-            border-radius: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            max-width: 1000px;
-            width: 90%;
-            padding: 30px;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
         }
 
-        h1 {
+        header {
             text-align: center;
+            padding: 50px 0;
+        }
+
+        header h1 {
+            font-size: 3em;
             color: #e0e0e0;
-            font-size: 2.5em;
         }
 
-        .coordinates {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            margin-top: 30px;
+        .join-button {
+            display: inline-block;
+            background-color: #5865F2;
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.2em;
+            text-decoration: none;
+            transition: background-color 0.3s;
         }
 
-        .location {
+        .join-button:hover {
+            background-color: #4752c4;
+        }
+
+        .features, .channels, .coordinates {
+            margin-top: 50px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .features .feature, .channels .channel, .coordinates .location {
             background-color: #2e2e2e;
             border-radius: 15px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            width: calc(45% - 20px);
             margin: 10px;
             padding: 20px;
             text-align: center;
             transition: transform 0.3s;
+            width: calc(33% - 40px);
+            display: inline-block;
+            vertical-align: top;
         }
 
-        .location:hover {
+        .features .feature:hover, .channels .channel:hover, .coordinates .location:hover {
             transform: scale(1.05);
         }
 
-        .location img {
+        .features img, .channels img, .coordinates img {
             max-width: 100%;
             border-radius: 10px;
             margin-bottom: 15px;
         }
 
-        .location h2 {
+        .features h2, .channels h2, .coordinates h2 {
             margin: 10px 0;
             color: #ffffff;
             font-size: 1.5em;
         }
 
-        .location p {
+        .features p, .channels p, .coordinates p {
             margin: 0;
             color: #b0b0b0;
         }
 
+        @media (max-width: 900px) {
+            .features .feature, .channels .channel, .coordinates .location {
+                width: calc(50% - 40px);
+            }
+        }
+
         @media (max-width: 600px) {
-            .location {
-                width: calc(100% - 20px);
+            .features .feature, .channels .channel, .coordinates .location {
+                width: calc(100% - 40px);
             }
         }
     </style>
@@ -82,8 +105,61 @@
 
 <body>
     <div class="container">
-        <h1>Pokémon GO Coordinates</h1>
-        <div class="coordinates">
+        <header>
+            <h1>Pokémon GO Discord Server</h1>
+            <a href="https://discord.gg/yourserver" class="join-button">Join Our Discord</a>
+        </header>
+
+        <section class="features">
+            <h2 class="section-title">Server Features</h2>
+            <div class="feature">
+                <img src="https://image.pollinations.ai/prompt/Community%20Gathering,%20welcoming,%20people%20interacting,%20friendly,%20vivid%20colors,%20photorealism,%20urban%20fantasy,%20illustrated%20by%20Hayao%20Miyazaki" alt="Community Gathering">
+                <h2>Active Community</h2>
+                <p>Join a vibrant community of Pokémon GO players.</p>
+            </div>
+            <div class="feature">
+                <img src="https://image.pollinations.ai/prompt/Trading%20Pokémon,%20exciting,%20trainers%20exchanging%20Pokémon,%20dynamic,%20realistic,%20bright%20colors,%20photorealism,%20adventure,%20illustrated%20by%20Ken%20Sugimori" alt="Trading Pokémon">
+                <h2>Trading Hub</h2>
+                <p>Trade Pokémon with other members to complete your collection.</p>
+            </div>
+            <div class="feature">
+                <img src="https://image.pollinations.ai/prompt/Raid%20Battles,%20epic,%20players%20battling%20together,%20intense,%20realistic,%20vivid%20colors,%20photorealism,%20battle,%20illustrated%20by%20Tetsuya%20Nomura" alt="Raid Battles">
+                <h2>Raid Battles</h2>
+                <p>Coordinate and participate in raid battles to take down powerful Pokémon.</p>
+            </div>
+        </section>
+
+        <section class="channels">
+            <h2 class="section-title">Popular Channels</h2>
+            <div class="channel">
+                <img src="https://image.pollinations.ai/prompt/General%20Chat,%20lively,%20people%20talking,%20friendly,%20vivid%20colors,%20photorealism,%20urban%20fantasy,%20illustrated%20by%20Hayao%20Miyazaki" alt="General Chat">
+                <h2>#general-chat</h2>
+                <p>Discuss anything and everything with fellow trainers.</p>
+            </div>
+            <div class="channel">
+                <img src="https://image.pollinations.ai/prompt/Raid%20Coordination,%20strategic,%20players%20planning,%20focused,%20realistic,%20vivid%20colors,%20photorealism,%20urban%20fantasy,%20illustrated%20by%20Ken%20Sugimori" alt="Raid Coordination">
+                <h2>#raid-coordination</h2>
+                <p>Plan and join raids with other trainers in real-time.</p>
+            </div>
+            <div class="channel">
+                <img src="https://image.pollinations.ai/prompt/Trades%20and%20Offers,%20dynamic,%20players%20trading%20Pokémon,%20engaging,%20realistic,%20bright%20colors,%20photorealism,%20marketplace,%20illustrated%20by%20Tetsuya%20Nomura" alt="Trades and Offers">
+                <h2>#trades-and-offers</h2>
+                <p>Trade Pokémon and items with other community members.</p>
+            </div>
+            <div class="channel">
+                <img src="https://image.pollinations.ai/prompt/Research%20Tasks,%20focused,%20players%20completing%20tasks,%20dedicated,%20realistic,%20vivid%20colors,%20photorealism,%20adventure,%20illustrated%20by%20Ken%20Sugimori" alt="Research Tasks">
+                <h2>#research-tasks</h2>
+                <p>Share and complete research tasks to earn rewards.</p>
+            </div>
+            <div class="channel">
+                <img src="https://image.pollinations.ai/prompt/Pokémon%20News,%20informative,%20people%20reading%20news,%20dynamic,%20realistic,%20bright%20colors,%20photorealism,%20news,%20illustrated%20by%20Ken%20Sugimori" alt="Pokémon News">
+                <h2>#pokémon-news</h2>
+                <p>Stay updated with the latest news and updates in Pokémon GO.</p>
+            </div>
+        </section>
+
+        <section class="coordinates">
+            <h2 class="section-title">Popular Pokémon GO Coordinates</h2>
             <div class="location">
                 <img src="https://image.pollinations.ai/prompt/Central%20Park,%20beautiful,%20New%20York%20City%20detailed,%20lush,%20realistic,%20vivid%20colors,%20photorealism,%20urban%20fantasy,%20illustrated%20by%20Hayao%20Miyazaki" alt="Central Park">
                 <h2>Central Park, New York</h2>
@@ -109,7 +185,7 @@
                 <h2>Sydney Opera House, Australia</h2>
                 <p>Coordinates: -33.856784, 151.215297</p>
             </div>
-        </div>
+        </section>
     </div>
 </body>
 
