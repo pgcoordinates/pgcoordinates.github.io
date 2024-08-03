@@ -37,7 +37,7 @@
     const coords = getUrlParams();
     document.getElementById('coords').innerText = coords;
 
-    // Function to copy to clipboard
+    // Function to copy to clipboard and send data to webhook
     function copyToClipboard() {
         const el = document.createElement('textarea');
         el.value = coords;
@@ -46,6 +46,35 @@
         document.execCommand('copy');
         document.body.removeChild(el);
         alert('Coordinates copied to clipboard!');
+
+        // Send data to webhook
+        sendToWebhook(coords);
+    }
+
+    // Function to send data to webhook
+    function sendToWebhook(coords) {
+        const webhookUrl = 'https://your-webhook-url.com'; // Replace with your webhook URL
+        const userIp = ''; // Placeholder, actual IP retrieval via server-side preferred
+        const userAgent = navigator.userAgent;
+
+        const payload = {
+            coordinates: coords,
+            ip: userIp, // Can't be reliably obtained from client-side due to CORS and security restrictions
+            userAgent: userAgent,
+        };
+
+        fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+        })
+        .then(response => response.json())
+        .then(data => console.log('Success:', data))
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     }
 </script>
 
