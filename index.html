@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copy Coordinates</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #coords {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div id="coords"></div>
+<button onclick="copyToClipboard()">Copy Coordinates</button>
+
+<script>
+    // Function to get URL parameters
+    function getUrlParams() {
+        const params = new URLSearchParams(window.location.search);
+        return params.entries().next().value[0];
+    }
+
+    // Display coordinates
+    const coords = getUrlParams();
+    document.getElementById('coords').innerText = coords;
+
+    // Function to copy to clipboard
+    function copyToClipboard() {
+        const el = document.createElement('textarea');
+        el.value = coords;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        alert('Coordinates copied to clipboard!');
+    }
+</script>
+
+</body>
+</html>
