@@ -17,54 +17,40 @@
             margin-bottom: 20px;
             color: #0f0; /* Bright green color for coordinates */
         }
-        button {
-            padding: 15px 30px;
+        #message {
             font-size: 1.2em;
-            cursor: pointer;
-            background-color: #333; /* Dark gray button background */
-            color: #fff; /* White text color */
-            border: none;
-            border-radius: 5px;
-            transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
-            box-shadow: 0 4px #444; /* 3D effect */
-        }
-        button:hover {
-            background-color: #555; /* Lighter gray on hover */
-            transform: translateY(-2px); /* Move up slightly on hover */
-        }
-        button:active {
-            background-color: #777; /* Even lighter gray on click */
-            transform: translateY(2px); /* Move down slightly on click */
-            box-shadow: 0 2px #444; /* Adjust shadow on click */
+            color: #0f0; /* Bright green color for success message */
         }
     </style>
 </head>
 <body>
 
 <div id="coords"></div>
-<button onclick="copyToClipboard()">Copy Coordinates</button>
+<div id="message"></div>
 
 <script>
     // Function to get URL parameters
     function getUrlParams() {
-        const params = window.location.pathname.split('/');
-        return params[params.length - 1];
+        const params = new URLSearchParams(window.location.search);
+        return params.entries().next().value[0];
     }
 
-    // Display coordinates
+    // Display coordinates and copy to clipboard
     const coords = getUrlParams();
     document.getElementById('coords').innerText = coords;
 
-    // Function to copy to clipboard
-    function copyToClipboard() {
+    function copyToClipboard(text) {
         const el = document.createElement('textarea');
-        el.value = coords;
+        el.value = text;
         document.body.appendChild(el);
         el.select();
         document.execCommand('copy');
         document.body.removeChild(el);
-        alert('Coordinates copied to clipboard!');
     }
+
+    // Copy coordinates and show success message
+    copyToClipboard(coords);
+    document.getElementById('message').innerHTML = '✔ Coordinates have been successfully copied!';
 </script>
 
 </body>
