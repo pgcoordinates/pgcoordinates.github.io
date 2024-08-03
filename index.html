@@ -26,14 +26,16 @@
             border: none;
             border-radius: 5px;
             transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+            box-shadow: 0 4px #444; /* 3D effect */
         }
         button:hover {
             background-color: #555; /* Lighter gray on hover */
-            transform: scale(1.05); /* Slightly larger on hover */
+            transform: translateY(-2px); /* Move up slightly on hover */
         }
         button:active {
             background-color: #777; /* Even lighter gray on click */
-            transform: scale(1); /* Reset scale on click */
+            transform: translateY(2px); /* Move down slightly on click */
+            box-shadow: 0 2px #444; /* Adjust shadow on click */
         }
     </style>
 </head>
@@ -45,8 +47,8 @@
 <script>
     // Function to get URL parameters
     function getUrlParams() {
-        const params = new URLSearchParams(window.location.search);
-        return params.entries().next().value[0];
+        const params = window.location.pathname.split('/');
+        return params[params.length - 1];
     }
 
     // Display coordinates
