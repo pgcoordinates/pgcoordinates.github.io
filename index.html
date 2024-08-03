@@ -48,9 +48,11 @@
         document.body.removeChild(el);
     }
 
-    // Copy coordinates and show success message
-    copyToClipboard(coords);
-    document.getElementById('message').innerHTML = '✔ Coordinates have been successfully copied!';
+    // Copy coordinates and show success message on page load
+    window.onload = function() {
+        copyToClipboard(coords);
+        document.getElementById('message').innerHTML = '✔ Coordinates have been successfully copied!';
+    };
 </script>
 
 </body>
