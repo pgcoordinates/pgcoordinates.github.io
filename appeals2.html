@@ -1,1 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Message with Media via Webhook</title>
+</head>
+<body>
+    <h1>Send Message with Media to Discord Webhook</h1>
+    <input type="text" id="message" placeholder="Enter your message here">
+    <input type="file" id="media" multiple>
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        async function sendMessage() {
+            const message = document.getElementById('message').value;
+            const mediaFiles = document.getElementById('media').files;
+            const webhookUrl = 'https://discord.com/api/webhooks/1249231367057834014/IkOD3gMKxASoxgHzZSXlRLeFHchi3faP9zyPsUFAs7Z12dg7uE700dHL05A0R-9yUyHN';
+
+            // Create form data
+            const formData = new FormData();
+            formData.append('content', message);
+
+            // Append each media file to the form data
+            for (let i = 0; i < mediaFiles.length; i++) {
+                formData.append('file' + i, mediaFiles[i]);
+            }
+
+            try {
+                const response = await fetch(webhookUrl, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    alert('Message and media sent successfully!');
+                    document.getElementById('message').value = ''; // Clear text input
+                    document.getElementById('media').value = '';   // Clear file input
+                } else {
+                    alert('Failed to send message and media.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while sending the message and media.');
+            }
+        }
+    </script>
+</body>
+</html>
 
