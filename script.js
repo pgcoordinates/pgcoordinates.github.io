@@ -71,6 +71,7 @@ function waitForHoldAction(keys, duration) {
                     taskElement.innerText = '';
                     document.removeEventListener('keydown', actionListener);
                     document.removeEventListener('keyup', actionListener);
+                    document.removeEventListener('mousedown', actionListener);
                     setTimeout(displayNextTask, 500); // Show next task after 500ms delay
                 }
             }, 1000);
@@ -78,6 +79,7 @@ function waitForHoldAction(keys, duration) {
     };
 
     document.addEventListener('keydown', actionListener);
+    document.addEventListener('mousedown', actionListener);
     document.addEventListener('keyup', () => {
         clearInterval(holdInterval);
         timer = duration; // Reset timer if keys are released early
@@ -86,15 +88,49 @@ function waitForHoldAction(keys, duration) {
 
 function isKeyDown(keys) {
     if (Array.isArray(keys)) {
-        return keys.every(key => key === 'left_click' ? mouse.isButtonPressed(0) : key === 'right_click' ? mouse.isButtonPressed(2) : keyboard.isKeyPressed(key));
+        return keys.every(key => key === 'left_click' ? isMouseButtonDown(0) : key === 'right_click' ? isMouseButtonDown(2) : isKeyboardKeyDown(key));
     }
-    return keys === 'left_click' ? mouse.isButtonPressed(0) : keys === 'right_click' ? mouse.isButtonPressed(2) : keyboard.isKeyPressed(keys);
+    return keys === 'left_click' ? isMouseButtonDown(0) : keys === 'right_click' ? isMouseButtonDown(2) : isKeyboardKeyDown(keys);
 }
 
+function isMouseButtonDown(button) {
+    return (button === 0 && mouseDownState.left) || (button === 2 && mouseDownState.right);
+}
+
+function isKeyboardKeyDown(key) {
+    return keyDownState[key];
+}
+
+let keyDownState = {};
+let mouseDownState = { left: false, right: false };
+
 document.addEventListener('keydown', (e) => {
+    keyDownState[e.key] = true;
     if (e.key === 'Escape') {
         taskElement.innerText = 'Practice session ended.';
         startBtn.style.display = 'block';
         isRunning = false;
+        keyDownState = {}; // Reset state
+        mouseDownState = { left: false, right: false }; // Reset mouse state
+    }
+});
+
+document.addEventListener('keyup', (e) => {
+    keyDownState[e.key] = false;
+});
+
+document.addEventListener('mousedown', (e) => {
+    if (e.button === 0) {
+        mouseDownState.left = true;
+    } else if (e.button === 2) {
+        mouseDownState.right = true;
+    }
+});
+
+document.addEventListener('mouseup', (e) => {
+    if (e.button === 0) {
+        mouseDownState.left = false;
+    } else if (e.button === 2) {
+        mouseDownState.right = false;
     }
 });
