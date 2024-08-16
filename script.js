@@ -10,7 +10,7 @@ const tasks = [
     { task: 'reload', key: 'r' },
     { task: 'use skill', key: 'e' },
     { task: 'put gloo wall', key: 'q' },
-    { task: 'shoot', key: 'click' },
+    { task: 'shoot', key: 'left_click' }, // Updated to explicitly say left_click
     { task: 'scope', key: 'right_click' }
 ];
 
@@ -36,7 +36,9 @@ function displayNextTask() {
 
 function waitForAction(key) {
     const actionListener = (e) => {
-        if (e.key === key || (key === 'click' && e.type === 'click') || (key === 'right_click' && e.button === 2)) {
+        if ((e.key === key) ||
+            (key === 'left_click' && e.type === 'mousedown' && e.button === 0) ||
+            (key === 'right_click' && e.type === 'mousedown' && e.button === 2)) {
             taskElement.innerText = '';
             document.removeEventListener('keydown', actionListener);
             document.removeEventListener('mousedown', actionListener);
