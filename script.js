@@ -10,14 +10,10 @@ const tasks = [
     { task: 'reload', key: 'r' },
     { task: 'use skill', key: 'e' },
     { task: 'put gloo wall', key: 'q' },
-    { task: 'change gun to 1st alternative', key: '1' },
-    { task: 'change gun to pistol/2nd alternative', key: '2' },
-    { task: 'remove gun', key: '3' },
     { task: 'shoot', key: 'click' },
     { task: 'scope', key: 'right_click' }
 ];
 
-let taskInterval;
 let isRunning = false;
 
 const taskElement = document.getElementById('task');
@@ -29,20 +25,22 @@ function startPractice() {
     if (isRunning) return;
     isRunning = true;
     startBtn.style.display = 'none';
+    displayNextTask();
+}
 
-    taskInterval = setInterval(() => {
-        const randomTask = tasks[Math.floor(Math.random() * tasks.length)];
-        taskElement.innerText = `Task: ${randomTask.task}`;
-        waitForAction(randomTask.key);
-    }, 2000);
+function displayNextTask() {
+    const randomTask = tasks[Math.floor(Math.random() * tasks.length)];
+    taskElement.innerText = `Task: ${randomTask.task}`;
+    waitForAction(randomTask.key);
 }
 
 function waitForAction(key) {
     const actionListener = (e) => {
         if (e.key === key || (key === 'click' && e.type === 'click') || (key === 'right_click' && e.button === 2)) {
-            taskElement.innerText = 'Good Job!';
+            taskElement.innerText = '';
             document.removeEventListener('keydown', actionListener);
             document.removeEventListener('mousedown', actionListener);
+            setTimeout(displayNextTask, 500); // Show next task after 500ms delay
         }
     };
 
@@ -52,7 +50,6 @@ function waitForAction(key) {
 
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-        clearInterval(taskInterval);
         taskElement.innerText = 'Practice session ended.';
         startBtn.style.display = 'block';
         isRunning = false;
