@@ -3,68 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geo-Redirect</title>
+    <title>Geo-Redirect Using IP</title>
 </head>
 <body>
 
-<h1 id="demo">Checking your location...</h1>
+<h1 id="demo">Redirecting based on your location...</h1>
 
 <script>
-    const demo = document.getElementById("demo");
+    // Function to fetch location information based on IP
+    function fetchLocation() {
+        // Use ipinfo.io to get the user's country based on their IP address
+        fetch('https://ipinfo.io/json?token=YOUR_API_TOKEN')  // Replace YOUR_API_TOKEN with a real token from ipinfo.io
+        .then(response => response.json())
+        .then(data => {
+            const country = data.country;
 
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition, showError);
-        } else {
-            demo.innerHTML = "Geolocation is not supported by this browser.";
-        }
+            if (country === "IN") {
+                // Redirect users from India
+                window.location.href = "https://www.india-url.com";
+            } else {
+                // Redirect users from other countries
+                window.location.href = "https://www.global-url.com";
+            }
+        })
+        .catch(error => {
+            document.getElementById("demo").innerHTML = "Unable to determine your location.";
+            console.error("Error fetching IP information:", error);
+        });
     }
 
-    function showPosition(position) {
-        const lat = position.coords.latitude;
-        const lon = position.coords.longitude;
-
-        // Use an API to reverse geocode the latitude and longitude to get the country
-        const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`;
-
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                const country = data.address.country;
-
-                if (country === "India") {
-                    // Redirect users from India
-                    window.location.href = "https://www.india-url.com";
-                } else {
-                    // Redirect users from other countries
-                    window.location.href = "https://www.global-url.com";
-                }
-            })
-            .catch(error => {
-                demo.innerHTML = "Error retrieving location details.";
-                console.error("Error:", error);
-            });
-    }
-
-    function showError(error) {
-        switch (error.code) {
-            case error.PERMISSION_DENIED:
-                demo.innerHTML = "User denied the request for Geolocation.";
-                break;
-            case error.POSITION_UNAVAILABLE:
-                demo.innerHTML = "Location information is unavailable.";
-                break;
-            case error.TIMEOUT:
-                demo.innerHTML = "The request to get user location timed out.";
-                break;
-            case error.UNKNOWN_ERROR:
-                demo.innerHTML = "An unknown error occurred.";
-                break;
-        }
-    }
-
-    // Trigger location request
-    getLocation();
+    // Fetch location immediately on page load
+    fetchLocation();
 </script>
 
 </body>
