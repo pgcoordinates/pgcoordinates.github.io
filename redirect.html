@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geo-Redirect</title>
+</head>
+<body>
+
+<h1 id="demo">Checking your location...</h1>
+
+<script>
+    const demo = document.getElementById("demo");
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+            demo.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    function showPosition(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        // Use an API to reverse geocode the latitude and longitude to get the country
+        const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const country = data.address.country;
+
+                if (country === "India") {
+                    // Redirect users from India
+                    window.location.href = "https://www.india-url.com";
+                } else {
+                    // Redirect users from other countries
+                    window.location.href = "https://www.global-url.com";
+                }
+            })
+            .catch(error => {
+                demo.innerHTML = "Error retrieving location details.";
+                console.error("Error:", error);
+            });
+    }
+
+    function showError(error) {
+        switch (error.code) {
+            case error.PERMISSION_DENIED:
+                demo.innerHTML = "User denied the request for Geolocation.";
+                break;
+            case error.POSITION_UNAVAILABLE:
+                demo.innerHTML = "Location information is unavailable.";
+                break;
+            case error.TIMEOUT:
+                demo.innerHTML = "The request to get user location timed out.";
+                break;
+            case error.UNKNOWN_ERROR:
+                demo.innerHTML = "An unknown error occurred.";
+                break;
+        }
+    }
+
+    // Trigger location request
+    getLocation();
+</script>
+
+</body>
+</html>
