@@ -48,7 +48,7 @@
             if (channelType === "dm") {
                 url = `https://discord.com/api/v9/channels/${channelId}/messages?limit=100`;
             } else if (channelType === "server" && serverId) {
-                url = `https://discord.com/api/v9/guilds/${serverId}/channels/${channelId}/messages?limit=50`;
+                url = `https://discord.com/api/v9/guilds/${serverId}/channels/${channelId}/messages?limit=100`;
             } else {
                 status.innerText = "Please enter the Server ID for a server channel.";
                 return;
