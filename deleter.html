@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Message Deleter</title>
+</head>
+<body>
+    <h1>Discord Message Deleter</h1>
+    
+    <label for="token">User Token:</label>
+    <input type="text" id="token" placeholder="Enter your Discord token" required><br><br>
+
+    <label for="author_id">Author ID:</label>
+    <input type="text" id="author_id" placeholder="Enter the author ID" required><br><br>
+
+    <label for="channel_id">Channel ID:</label>
+    <input type="text" id="channel_id" placeholder="Enter the Channel ID" required><br><br>
+
+    <label>Channel Type:</label>
+    <input type="radio" id="dm" name="channel_type" value="dm" checked>
+    <label for="dm">DM</label>
+    <input type="radio" id="server" name="channel_type" value="server">
+    <label for="server">Server</label><br><br>
+
+    <label for="server_id">Server ID (if Server selected):</label>
+    <input type="text" id="server_id" placeholder="Enter the Server ID"><br><br>
+
+    <button onclick="fetchAndDeleteMessages()">Fetch and Delete Messages</button>
+    
+    <p id="status"></p>
+
+    <script>
+        async function fetchAndDeleteMessages() {
+            const token = document.getElementById('token').value;
+            const authorId = document.getElementById('author_id').value;
+            const channelId = document.getElementById('channel_id').value;
+            const channelType = document.querySelector('input[name="channel_type"]:checked').value;
+            const serverId = document.getElementById('server_id').value;
+            const status = document.getElementById('status');
+            
+            if (!token || !authorId || !channelId) {
+                status.innerText = "Please fill all required fields.";
+                return;
+            }
+            
+            let url;
+            if (channelType === "dm") {
+                url = `https://discord.com/api/v9/channels/${channelId}/messages?limit=50`;
+            } else if (channelType === "server" && serverId) {
+                url = `https://discord.com/api/v9/guilds/${serverId}/channels/${channelId}/messages?limit=50`;
+            } else {
+                status.innerText = "Please enter the Server ID for a server channel.";
+                return;
+            }
+
+            status.innerText = "Fetching messages...";
+            
+            try {
+                // Fetch messages
+                const response = await fetch(url, {
+                    headers: {
+                        'Authorization': token,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const messages = await response.json();
+
+                // Filter messages by author ID
+                const messagesByAuthor = messages.filter(msg => msg.author.id === authorId);
+
+                if (messagesByAuthor.length === 0) {
+                    status.innerText = "No messages found for the specified author.";
+                    return;
+                }
+
+                status.innerText = `Deleting ${messagesByAuthor.length} messages...`;
+
+                // Delete each message
+                for (const msg of messagesByAuthor) {
+                    const deleteUrl = `https://discord.com/api/v9/channels/${channelId}/messages/${msg.id}`;
+                    await fetch(deleteUrl, {
+                        method: 'DELETE',
+                        headers: {
+                            'Authorization': token
+                        }
+                    });
+                }
+
+                status.innerText = "Messages deleted successfully.";
+
+            } catch (error) {
+                console.error("Error:", error);
+                status.innerText = "An error occurred while fetching or deleting messages.";
+            }
+        }
+    </script>
+</body>
+</html>
