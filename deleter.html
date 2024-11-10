@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discord Message Deleter</title>
+    <title>Discord DM Message Deleter</title>
 </head>
 <body>
-    <h1>Discord Message Deleter</h1>
+    <h1>Discord DM Message Deleter</h1>
     
     <label for="token">User Token:</label>
     <input type="text" id="token" placeholder="Enter your Discord token" required><br><br>
@@ -15,16 +15,7 @@
     <input type="text" id="author_id" placeholder="Enter the author ID" required><br><br>
 
     <label for="channel_id">Channel ID:</label>
-    <input type="text" id="channel_id" placeholder="Enter the Channel ID" required><br><br>
-
-    <label>Channel Type:</label>
-    <input type="radio" id="dm" name="channel_type" value="dm" checked>
-    <label for="dm">DM</label>
-    <input type="radio" id="server" name="channel_type" value="server">
-    <label for="server">Server</label><br><br>
-
-    <label for="server_id">Server ID (if Server selected):</label>
-    <input type="text" id="server_id" placeholder="Enter the Server ID"><br><br>
+    <input type="text" id="channel_id" placeholder="Enter the DM Channel ID" required><br><br>
 
     <button onclick="fetchAndDeleteMessages()">Fetch and Delete Messages</button>
     
@@ -35,8 +26,6 @@
             const token = document.getElementById('token').value;
             const authorId = document.getElementById('author_id').value;
             const channelId = document.getElementById('channel_id').value;
-            const channelType = document.querySelector('input[name="channel_type"]:checked').value;
-            const serverId = document.getElementById('server_id').value;
             const status = document.getElementById('status');
             
             if (!token || !authorId || !channelId) {
@@ -44,24 +33,25 @@
                 return;
             }
             
-            let url;
-            if (channelType === "dm") {
-                url = `https://discord.com/api/v9/channels/${channelId}/messages?limit=100`;
-            } else if (channelType === "server" && serverId) {
-                url = `https://discord.com/api/v9/guilds/${serverId}/channels/${channelId}/messages?limit=100`;
-            } else {
-                status.innerText = "Please enter the Server ID for a server channel.";
-                return;
-            }
-
+            const url = `https://discord.com/api/v9/channels/${channelId}/messages?limit=100`;
             status.innerText = "Fetching messages...";
             
             try {
                 // Fetch messages
                 const response = await fetch(url, {
                     headers: {
-                        'Authorization': token,
-                        'Content-Type': 'application/json'
+                        'accept': '*/*',
+                        'accept-encoding': 'gzip, deflate, br, zstd',
+                        'accept-language': 'en-US,en;q=0.9',
+                        'authorization': token,
+                        'content-type': 'application/json',
+                        'origin': 'https://discord.com',
+                        'referer': 'https://discord.com',
+                        'sec-ch-ua': '"Not)A;Brand";v="99", "Microsoft Edge";v="127", "Chromium";v="127"',
+                        'sec-ch-ua-mobile': '?0',
+                        'sec-ch-ua-platform': '"Windows"',
+                        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0',
+                        'x-discord-locale': 'en-GB',
                     }
                 });
                 
@@ -83,7 +73,8 @@
                     await fetch(deleteUrl, {
                         method: 'DELETE',
                         headers: {
-                            'Authorization': token
+                            'authorization': token,
+                            'content-type': 'application/json'
                         }
                     });
                 }
