@@ -1,0 +1,56 @@
+{
+  "networks": [
+    {
+      "name": "Bitcoin Network",
+      "icon": "https://raw.githubusercontent.com/VadimMalykhin/binance-icons/main/crypto/btc.svg",
+      "iconAlt": "BTC",
+      "supportedTokens": ["BTC"],
+      "address": "bc1qc5cv9zgln7ngpjt67ygnmyuxzhkadke9lqe999",
+      "trackUrl": "https://live.blockcypher.com/btc/address/"
+    },
+    {
+      "name": "Litecoin Network",
+      "icon": "https://raw.githubusercontent.com/VadimMalykhin/binance-icons/main/crypto/ltc.svg",
+      "iconAlt": "LTC",
+      "supportedTokens": ["LTC"],
+      "address": "LMbEcQfBaHTPoLGLRAqLgNWGg9Tt7dBY2G",
+      "trackUrl": "https://live.blockcypher.com/ltc/address/"
+    },
+    {
+      "name": "ETH Network",
+      "icon": "https://raw.githubusercontent.com/VadimMalykhin/binance-icons/main/crypto/eth.svg",
+      "iconAlt": "ETH",
+      "supportedTokens": ["ETH", "USDT-ERC20", "USDC-ERC20"],
+      "address": "0x65335db8Ee699242d7C42264713f837602057dB1",
+      "trackUrl": "https://etherscan.io/address/",
+      "suffix": "#tokentxns"
+    },
+    {
+      "name": "TRON Network",
+      "icon": "https://raw.githubusercontent.com/VadimMalykhin/binance-icons/main/crypto/trx.svg",
+      "iconAlt": "TRX",
+      "supportedTokens": ["TRX", "USDT-TRC20", "USDC-TRC20"],
+      "address": "TQ5TQApNvHF9hcLimsgtyyKfq9TTe4a2Na",
+      "trackUrl": "https://tronscan.org/#/address/",
+      "suffix": "/transfers"
+    },
+    {
+      "name": "BNB Network",
+      "icon": "https://raw.githubusercontent.com/VadimMalykhin/binance-icons/main/crypto/bnb.svg",
+      "iconAlt": "BNB",
+      "supportedTokens": ["BNB", "LTC-BEP20", "USDT-BEP20", "USDC-BEP20"],
+      "address": "0x65335db8Ee699242d7C42264713f837602057dB1",
+      "trackUrl": "https://bscscan.com/address/",
+      "suffix": "#tokentxns"
+    },
+    {
+      "name": "Solana Network",
+      "icon": "https://raw.githubusercontent.com/VadimMalykhin/binance-icons/main/crypto/sol.svg",
+      "iconAlt": "SOL",
+      "supportedTokens": ["SOL", "USDT-SPL", "USDC-SPL"],
+      "address": "5eG33arSCWFomAcFL16Jm2ZEnCo7eTDdxdW93GZKUr99",
+      "trackUrl": "https://explorer.solana.com/address/",
+      "suffix": "/tokens"
+    }
+  ]
+}
